@@ -23,8 +23,8 @@
 #         print("*",end = "")
 #     print( )
 
-a  = "dasdwasd"
-print(a[::])
+# a  = "dasdwasd"
+# print(a[::])
 
 
 
