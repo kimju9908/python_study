@@ -44,6 +44,15 @@ from sympy.abc import lamda
 # print(search_list(v, 18))
 # print(search_list(v, 900))
 """------------------------------------------------------------------------------------------------"""
+# 기본값 인자
+# 함수 선언 시 매개 변수에 대한 기본값을 정의
+# # 매개변수에 기본값이 정의 되어 있는 경우 호출 시 인자값을 넣지 않으면 기본값으로 호출
+# def profile(name,grade=2,age=18,school="태양고"):
+#     print(f"이름:{name},학교{school},학년:{grade},나이:{age}")
+# profile("나희도")
+# profile("고유림")
+# profile("백이진",None,22)
+"""------------------------------------------------------------------------------------------------"""
 # 튜플과 함수
 # 튜플은 함수의 리턴에 많이 사용 됩니다. 다른 언어에서는 리턴으로 값을 되돌려 줄 때
 # 한개의 값만 전달 할 수 있지만 *파이썬에서는 여러개의 값으로 튜플을 이용하여 전달 가능* 합니다. (패킹과 언패킹)
@@ -67,4 +76,102 @@ from sympy.abc import lamda
 
 # print((lambda a,b:a+b)(1,2)) #위 함수와 같지만 코드가 간결해진다(람다를 사용)
 
+# 가변 매개변수
+# 함수의 매개변수 앞에 *를 붙여주면 함수의 매개 변수를 몇개를 입력 하든 함수 내에서 튜플로 인식
+
+# def profile(name,age,*lang ):
+#     print(f"이름: {name}, 나이 : {age}",end= " ")
+#     for e in lang :
+#          print(e,end=" ")
+#          print()
+# profile("나희도",18,"python","java","c++")
+# profile("나희도",18,"python","java","c++","kotlin")
+"""------------------------------------------------------------------------------------------------"""
+# 지역변수, 전역변수
+# 전역변수로 선언된 변수를 함수내에서 사용하고자 할 때는 global 키워드가 필요 합니다.
+# 전역 변수로 선언되면 함수보다 변수의 생존범위가 넓어서 리턴값이 필요 없습니다.
+# 하지만 특별한 경우가 아니면 매개변수로 값을 전달해서 사용하는 것이 좋은 방법 입니다.
+# (전역 변수로 선언하는 것과 지역 변수의 리턴으로 받는 방법 비교 확인)
+
+# knife =10
+# def game(player):
+#     global  knife
+#     knife -=player
+#     print(f"남아있는 칼은 {knife} 자루 입니다")
+#
+# a = int(input("경기 참여 수를 입력하세요:"))
+# game(a)
+
+
+# knife =10
+# def game(knife,player):
+#
+#     knife -=player
+#     print(f"남아있는 칼은 {knife} 자루 입니다")
+# a = int(input("경기 참여 수를 입력하세요:"))
+# game2(knife,a)
+"""------------------------------------------------------------------------------------------------"""
+#재귀함수
+# def recursive_sum(n):
+#     if n==1 : return 1
+#     return n + recursive_sum(n-1)
+# num = int(input("정수입력: "))
+# print(recursive_sum(num))
+
+"""------------------------------------------------------------------------------------------------"""
+# 클로저와 데코레이터
+
+# 클로저는 간단히 말해 함수 안에 내부 함수(inner function)를 구현 하고 그 내부 함수를 반환하는 함수를 말합니다.
+# 이 때 외부 함수는 자신이 가진 변수값 등을 내부 함수에 전달하여 실행되도록 합니다. (콜백 함수 등에 사용 됩니다.)
+# def calc() :
+#     a = 3
+#     b = 5
+#     def mul_add(x):
+#         return a * x + b
+#     return mul_add
+#
+# c = calc()
+# print(c(1), c(2), c(3), c(4), c(5))
+
+# import time
+#
+# def perform_operation(x, y, callback):
+#     result = 0
+#     for e in range(x) :
+#         result += e + x + y
+#         time.sleep(1)
+#     callback(result)  # 콜백 함수 호출
+#
+# # 콜백 함수 정의
+# def callback_function(result):
+#     print(f"Operation result is: {result}")
+#
+# # perform_operation 함수를 호출하면서 콜백 함수를 전달
+# perform_operation(10, 20, callback_function)
+
+# 데코레이터
+# 이미 만들어져 있는 함수의 앞과 뒤에 기능을 추가 할 때 사용 됩니다.
+# 호출 방법은 2가지 방법이 있습니다.
+# import datetime
+#
+# def datetime_deco(func):
+#     def decorated():
+#         print(datetime.datetime.now())
+#         func()
+#         print(datetime.datetime.now())
+#     return decorated
+#
+# @datetime_deco
+# def for_sum():
+#     sum = 0
+#     for i in range(1, 100):
+#         sum += i
+#     print(sum)
+#
+# # 첫번째 방법
+# # test = datetime_deco(for_sum)
+# # test()
+#
+# # 두번째 방법
+# for_sum()
 
